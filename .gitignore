@@ -1,0 +1,15 @@
+# --- Top-Level Ignores ---
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# --- Backend Ignores ---
+backend/node_modules/
+backend/.env
+
+# --- Frontend Ignores ---
+frontend/node_modules/
+frontend/.env
+frontend/dist/
+frontend/build/
