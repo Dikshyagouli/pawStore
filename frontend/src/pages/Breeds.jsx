@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 // Assuming components are located in '../components/'
 import Navbar from '../component/Navbar'; 
 import Footer from '../component/footer'; 
+import { useLocation } from 'react-router-dom';
 import goldend from '../assets/golden.jpg';
 import husky from '../assets/husky.jpg';
 import shepherd from '../assets/shepherd.jpg';
 import pug from '../assets//pug.jpg';
-// We can reuse BreedSection's data structure as a starting point, but the page layout will be different.
 
 // Mock data for a Breeds Catalog
 const allBreeds = [
@@ -18,6 +18,18 @@ const allBreeds = [
 ];
 
 export default function Breeds() {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = searchParams.get('search')?.toLowerCase() || '';
+
+    const filteredBreeds = useMemo(() => {
+        if (!searchQuery) return allBreeds;
+        return allBreeds.filter((breed) => {
+            const haystack = `${breed.name} ${breed.size} ${breed.temperament}`.toLowerCase();
+            return haystack.includes(searchQuery);
+        });
+    }, [searchQuery]);
+
     return (
         <>
             <Navbar />
@@ -35,22 +47,16 @@ export default function Breeds() {
                     </p>
                 </header>
                 
-                {/* Filter/Search Bar Placeholder (Optional but good for a catalog page) 
-                */}
-                <div className="row justify-content-center mb-5">
-                    <div className="col-md-8">
-                        <input
-                            type="search"
-                            className="form-control form-control-lg rounded-pill border-0 shadow-sm"
-                            placeholder="Search by breed name, size, or temperament..."
-                            style={{ backgroundColor: "#ffe8da" }}
-                        />
-                    </div>
-                </div>
+                {/* Optional inline hint when coming from navbar search */}
+                {searchQuery && (
+                    <p className="text-center text-muted mb-4">
+                        Showing breeds matching "<strong>{searchQuery}</strong>"
+                    </p>
+                )}
 
                 {/* Breed Grid / Cards */}
                 <div className="row g-4">
-                    {allBreeds.map((breed, index) => (
+                    {filteredBreeds.map((breed, index) => (
                         <div key={index} className="col-lg-4 col-md-6">
                             <div className="card h-100 shadow-sm border-0" style={{ borderRadius: "1rem" }}>
                                 <img 
@@ -68,11 +74,26 @@ export default function Breeds() {
                                         <br/>
                                         **Size:** {breed.size}
                                     </p>
-                                    <a href="#" className="btn btn-sm btn-orange-custom mt-2">View Details</a>
+                                    {/* --- UPDATED LINK (Conceptual) --- */}
+                                    {/* In a real app with React Router, this would be: 
+                                    <Link to={`/breeds/${breed.name.toLowerCase().replace(' ', '-')}`} ...>
+                                    */}
+                                    <a 
+                                        href={`/breeds/${breed.name.toLowerCase().replace(' ', '-')}`} 
+                                        className="btn btn-sm btn-orange-custom mt-2"
+                                    >
+                                        View Details
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     ))}
+                    {filteredBreeds.length === 0 && (
+                        <div className="col-12 text-center py-5">
+                            <h5 className="mb-2">No breeds found</h5>
+                            <p className="text-muted">Try searching with another breed name, size, or temperament.</p>
+                        </div>
+                    )}
                 </div>
 
             </main>
