@@ -7,10 +7,8 @@ export default function Contact() {
         <>
             <Navbar />
 
-            {/* Contact Page Content */}
             <div className="container py-5">
                 
-                {/* Header */}
                 <header className="text-center mb-5">
                     <h1 className="fw-bolder" style={{ color: "#2c2c2c", fontSize: "3rem" }}>
                         Get In Touch
@@ -22,7 +20,6 @@ export default function Contact() {
                 
                 <div className="row g-5 justify-content-center">
                     
-                    {/* LEFT COLUMN: Contact Form (6/12 width) */}
                     <div className="col-lg-6">
                         <div className="card shadow-sm p-4 border-0" style={{ borderRadius: "1rem" }}>
                             <h4 className="fw-bold mb-4" style={{ color: "#2c2c2c" }}>Send us a message</h4>
@@ -44,15 +41,12 @@ export default function Contact() {
                                     <textarea className="form-control" id="message" rows="4" style={{ borderRadius: "0.5rem", backgroundColor: "#ffe8da" }} required></textarea>
                                 </div>
                                 
-                                {/* Submit button using the custom orange style */}
                                 <button type="submit" className="btn btn-orange-custom px-4 py-2 fw-bold w-100">
                                     Submit
                                 </button>
                             </form>
                         </div>
                     </div>
-
-                    {/* RIGHT COLUMN: Contact Information (4/12 width) */}
                     <div className="col-lg-4">
                         <div className="bg-light p-4" style={{ borderRadius: "1rem" }}>
                             <h4 className="fw-bold mb-4" style={{ color: "#ff914d" }}>Our Details</h4>
@@ -83,7 +77,6 @@ export default function Contact() {
                             
                             <hr/>
                             
-                            {/* Social Media Icons (Consistent with Footer) */}
                             <h5 className="fw-bold mt-4" style={{ color: "#2c2c2c" }}>Follow Us</h5>
                             <div>
                                 <a href="#" className="social-icon-link" aria-label="Facebook"><i className="bi bi-facebook fs-4 me-3" style={{ color: "#ff914d" }}></i></a>

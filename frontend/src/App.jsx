@@ -1,8 +1,5 @@
-// src/App.jsx
-
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// Import all page components
 import Home from "./pages/Home";
 import Breeds from "./pages/Breeds";
 import Accessories from "./pages/Accessories "; 
@@ -17,16 +14,15 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFailure from "./pages/PaymentFailure";
+import UserManagement from "./pages/admin/UserManagement";
+import OrderManagement from "./pages/admin/OrderManagement";
 
-// 🚀 NEW: Import Context Providers
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
-    // 1. Wrap the entire app with BrowserRouter
     <BrowserRouter>
-      {/* 2. Wrap all routes with the Providers */}
       <AuthProvider>
         <CartProvider>
           <Routes>
@@ -41,6 +37,8 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/users" element={<UserManagement />} />
+            <Route path="/admin/orders" element={<OrderManagement />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/payment-failure" element={<PaymentFailure />} />

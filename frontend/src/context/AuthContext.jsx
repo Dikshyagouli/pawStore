@@ -1,4 +1,3 @@
-// src/context/AuthContext.jsx
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -7,19 +6,12 @@ export const useAuth = () => {
     return useContext(AuthContext);
 };
 
-// Define your backend API URL
-const API_URL = 'http://localhost:5000/api/auth'; // Change 5000 if your server port is different
+const API_URL = 'http://localhost:5000/api/auth'; 
 
 export const AuthProvider = ({ children }) => {
-    // Check localStorage on mount for persistent login
     const initialUser = JSON.parse(localStorage.getItem('userInfo')) || null;
     
-    const [user, setUser] = useState(initialUser); // Holds user details and token
-    const isLoggedIn = !!user; // Simple check if user object exists
-
-    // ------------------------------------------------------------------
-    // 🚀 NEW: API-integrated LOGIN
-    // ------------------------------------------------------------------
+    const [user, setUser] = useState(initialUser); 
     const login = async (email, password) => {
         const config = {
             method: 'POST',
@@ -32,12 +24,10 @@ export const AuthProvider = ({ children }) => {
             const data = await response.json();
 
             if (response.ok) {
-                // Success: Backend returns user data + token
                 setUser(data);
                 localStorage.setItem('userInfo', JSON.stringify(data));
                 return { success: true };
             } else {
-                // Failure: Backend returns an error message
                 return { success: false, message: data.message || 'Login failed.' };
             }
         } catch (error) {
@@ -48,10 +38,6 @@ export const AuthProvider = ({ children }) => {
             return { success: false, message: `Network error: ${error.message}` };
         }
     };
-
-    // ------------------------------------------------------------------
-    // 🚀 NEW: API-integrated SIGNUP (Registration)
-    // ------------------------------------------------------------------
     const signup = async (name, email, password) => {
         const config = {
             method: 'POST',
@@ -64,12 +50,10 @@ export const AuthProvider = ({ children }) => {
             const data = await response.json();
 
             if (response.ok) {
-                // Success: Backend automatically logs in user and returns user data + token
                 setUser(data);
                 localStorage.setItem('userInfo', JSON.stringify(data));
                 return { success: true };
             } else {
-                // Failure: Backend returns an error message (e.g., "User already exists")
                 return { success: false, message: data.message || 'Registration failed.' };
             }
         } catch (error) {
@@ -81,9 +65,6 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // ------------------------------------------------------------------
-    // 🚀 NEW: API-integrated ADMIN SIGNUP (Registration with Admin Key)
-    // ------------------------------------------------------------------
     const signupAdmin = async (name, email, password, adminKey) => {
         const config = {
             method: 'POST',
@@ -96,12 +77,10 @@ export const AuthProvider = ({ children }) => {
             const data = await response.json();
 
             if (response.ok) {
-                // Success: Backend automatically logs in admin and returns user data + token
                 setUser(data);
                 localStorage.setItem('userInfo', JSON.stringify(data));
                 return { success: true };
             } else {
-                // Failure: Backend returns an error message
                 return { success: false, message: data.message || 'Admin registration failed.' };
             }
         } catch (error) {

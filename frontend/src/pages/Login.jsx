@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useNavigate, Link } from 'react-router-dom';
@@ -16,7 +15,6 @@ export default function Login() {
         const result = await login(email, password); 
 
         if (result.success) {
-            // Check if user is admin and show message
             const userInfo = JSON.parse(localStorage.getItem('userInfo'));
             if (userInfo?.isAdmin) {
                 alert('Welcome back, Admin! You can access the Admin Dashboard.');
@@ -28,13 +26,11 @@ export default function Login() {
     };
 
     const handleGoogleLogin = () => {
-        // Placeholder for Google OAuth - can be implemented later
         alert('Google login coming soon!');
     };
 
     return (
         <div style={{ minHeight: '100vh', display: 'flex', backgroundColor: '#fff5ee' }}>
-            {/* Left Column - Login Form */}
             <div style={{ 
                 flex: '1', 
                 backgroundColor: 'white', 
@@ -44,7 +40,6 @@ export default function Login() {
                 padding: '3rem',
                 maxWidth: '600px'
             }}>
-                {/* Logo */}
                 <div style={{ marginBottom: '3rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
                         <span style={{ fontSize: '2rem' }}>🐾</span>
@@ -58,7 +53,6 @@ export default function Login() {
                     </p>
                 </div>
 
-                {/* Google Login Button */}
                 <button
                     type="button"
                     onClick={handleGoogleLogin}
@@ -97,7 +91,6 @@ export default function Login() {
                     Log in with Google
                 </button>
 
-                {/* Divider */}
                 <div style={{ 
                     display: 'flex', 
                     alignItems: 'center', 
@@ -109,7 +102,6 @@ export default function Login() {
                     <div style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }}></div>
                 </div>
 
-                {/* Login Form */}
                 <form onSubmit={handleSubmit}>
                     <div style={{ marginBottom: '1.25rem' }}>
                         <label htmlFor="email" style={{ 
@@ -171,7 +163,6 @@ export default function Login() {
                     />
                 </div>
 
-                    {/* Remember me and Forgot password */}
                     <div style={{ 
                         display: 'flex', 
                         justifyContent: 'space-between', 
@@ -207,7 +198,6 @@ export default function Login() {
                         </Link>
                     </div>
 
-                    {/* Login Button */}
                     <button
                         type="submit"
                         style={{
@@ -230,7 +220,6 @@ export default function Login() {
                 </button>
             </form>
 
-                {/* Sign up link */}
                 <p style={{ 
                     textAlign: 'center', 
                     color: '#666', 
@@ -252,7 +241,6 @@ export default function Login() {
                 </p>
             </div>
 
-            {/* Right Column - Decorative Content */}
             <div style={{ 
                 flex: '1', 
                 backgroundColor: '#ffe8da',
@@ -264,7 +252,6 @@ export default function Login() {
                 position: 'relative',
                 overflow: 'hidden'
             }}>
-                {/* Decorative Elements */}
                 <div style={{
                     position: 'absolute',
                     top: '20%',
@@ -286,7 +273,6 @@ export default function Login() {
                     opacity: 0.1
                 }}></div>
 
-                {/* Main Illustration Area */}
                 <div style={{
                     textAlign: 'center',
                     zIndex: 1,
@@ -319,7 +305,6 @@ export default function Login() {
                     </p>
                 </div>
 
-                {/* Navigation Dots */}
                 <div style={{
                     position: 'absolute',
                     bottom: '2rem',

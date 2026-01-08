@@ -15,9 +15,6 @@ export default function Home() {
       <PetProducts />
       <BlogSection />
       <NewsletterSection />
-
-      {/* Your existing "Get Pawstore" section stays here */}
-
       <Footer />
     </>
   );

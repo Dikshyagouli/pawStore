@@ -1,5 +1,3 @@
-// src/pages/Cart.jsx
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx'; 
@@ -9,15 +7,12 @@ import Navbar from '../component/Navbar.jsx';
 export default function Cart() {
     const { 
         cartItems, 
-        removeItem, 
-        increaseQuantity, 
-        decreaseQuantity,
+        removeItem,
         loading
     } = useCart();
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
 
-    // Redirect to login if not logged in
     React.useEffect(() => {
         if (!isLoggedIn) {
             navigate('/login');
@@ -25,7 +20,7 @@ export default function Cart() {
     }, [isLoggedIn, navigate]);
 
     if (!isLoggedIn) {
-        return null; // Will redirect
+        return null; 
     }
 
     const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -59,41 +54,21 @@ export default function Cart() {
             <div className="container py-5">
                 <h2 className="mb-4" style={{ color: '#2c2c2c' }}>Shopping Cart ({cartItems.length} items)</h2>
                 <div className="row">
-                    {/* Cart Items List */}
                     <div className="col-lg-8">
                         {cartItems.map((item) => (
                             <div key={item._id || item.productId} className="d-flex align-items-center justify-content-between p-3 mb-3 border rounded shadow-sm">
                                 <div className="d-flex align-items-center">
-                                    {/* Product Info */}
                                     <div>
                                         <h5 className="mb-0">{item.name}</h5>
-                                        <p className="text-muted small mb-1">Price: ${item.price.toFixed(2)}</p>
+                                        <p className="text-muted small mb-1">Price: Rs.{item.price.toFixed(2)}</p>
                                         <p className="fw-bold mb-0" style={{ color: '#ff914d' }}>
-                                            Total: ${(item.price * item.quantity).toFixed(2)}
+                                            Total: Rs.{(item.price * item.quantity).toFixed(2)}
                                         </p>
                                     </div>
                                 </div>
-                                
-                                {/* Quantity Controls */}
                                 <div className="d-flex align-items-center">
-                                    <button 
-                                        className="btn btn-sm btn-outline-secondary me-2"
-                                        onClick={() => decreaseQuantity(item._id || item.productId)}
-                                        aria-label="Decrease quantity"
-                                    >
-                                        -
-                                    </button>
                                     <span className="mx-2">{item.quantity}</span>
-                                    <button 
-                                        className="btn btn-sm btn-outline-secondary"
-                                        onClick={() => increaseQuantity(item._id || item.productId)}
-                                        aria-label="Increase quantity"
-                                    >
-                                        +
-                                    </button>
                                 </div>
-
-                                {/* Remove Button */}
                                 <button
                                     className="btn btn-sm btn-outline-danger"
                                     onClick={() => removeItem(item._id || item.productId)}
@@ -104,7 +79,6 @@ export default function Cart() {
                         ))}
                     </div>
 
-                    {/* Summary Card */}
                     <div className="col-lg-4">
                         <div className="card shadow-sm">
                             <div className="card-body">

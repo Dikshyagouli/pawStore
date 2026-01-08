@@ -1,4 +1,3 @@
-// src/pages/AdminDashboard.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -16,7 +15,8 @@ export default function AdminDashboard() {
         totalAdmins: 0,
         totalCarts: 0,
         totalItems: 0,
-        totalRevenue: '0.00'
+        totalRevenue: '0.00',
+        totalOrders: 0
     });
     const [loading, setLoading] = useState(true);
 
@@ -54,11 +54,17 @@ export default function AdminDashboard() {
             if (statsResponse.ok) {
                 const statsData = await statsResponse.json();
                 setStats(statsData);
+            } else {
+                console.error('Stats response not OK:', statsResponse.status);
             }
 
             if (cartsResponse.ok) {
                 const cartsData = await cartsResponse.json();
-                setAllCarts(cartsData);
+                setAllCarts(cartsData || []);
+            } else {
+                console.error('Carts response not OK:', cartsResponse.status);
+                const errorData = await cartsResponse.json().catch(() => ({}));
+                console.error('Error data:', errorData);
             }
         } catch (error) {
             console.error('Error fetching admin data:', error);
@@ -68,7 +74,7 @@ export default function AdminDashboard() {
     };
 
     if (!isLoggedIn || !user?.isAdmin) {
-        return null; // Will redirect
+        return null; 
     }
 
     return (
@@ -113,8 +119,8 @@ export default function AdminDashboard() {
                                         </div>
                                     </div>
                                     <div className="flex-grow-1 ms-3">
-                                        <h6 className="text-muted mb-1">Total Carts</h6>
-                                        <h3 className="mb-0">{loading ? '...' : stats.totalCarts}</h3>
+                                        <h6 className="text-muted mb-1">Total Orders</h6>
+                                        <h3 className="mb-0">{loading ? '...' : stats.totalOrders || 0}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -158,27 +164,7 @@ export default function AdminDashboard() {
                     </div>
                 </div>
 
-                {/* Admin Actions */}
                 <div className="row g-4 mt-2">
-                    <div className="col-md-6">
-                        <div className="card shadow-sm border-0">
-                            <div className="card-header bg-white">
-                                <h5 className="mb-0" style={{ color: '#2c2c2c' }}>
-                                    <i className="bi bi-box-seam me-2" style={{ color: '#ff914d' }}></i>
-                                    Product Management
-                                </h5>
-                            </div>
-                            <div className="card-body">
-                                <p className="text-muted">Manage products, inventory, and pricing.</p>
-                                <button 
-                                    className="btn w-100" 
-                                    style={{ backgroundColor: '#ff914d', color: 'white' }}
-                                >
-                                    Manage Products
-                                </button>
-                            </div>
-                        </div>
-                    </div>
 
                     <div className="col-md-6">
                         <div className="card shadow-sm border-0">
@@ -193,6 +179,7 @@ export default function AdminDashboard() {
                                 <button 
                                     className="btn w-100" 
                                     style={{ backgroundColor: '#ff914d', color: 'white' }}
+                                    onClick={() => navigate('/admin/users')}
                                 >
                                     Manage Users
                                 </button>
@@ -213,6 +200,7 @@ export default function AdminDashboard() {
                                 <button 
                                     className="btn w-100" 
                                     style={{ backgroundColor: '#ff914d', color: 'white' }}
+                                    onClick={() => navigate('/admin/orders')}
                                 >
                                     View Orders
                                 </button>
@@ -220,28 +208,8 @@ export default function AdminDashboard() {
                         </div>
                     </div>
 
-                    <div className="col-md-6">
-                        <div className="card shadow-sm border-0">
-                            <div className="card-header bg-white">
-                                <h5 className="mb-0" style={{ color: '#2c2c2c' }}>
-                                    <i className="bi bi-graph-up me-2" style={{ color: '#ff914d' }}></i>
-                                    Analytics & Reports
-                                </h5>
-                            </div>
-                            <div className="card-body">
-                                <p className="text-muted">View sales reports and analytics.</p>
-                                <button 
-                                    className="btn w-100" 
-                                    style={{ backgroundColor: '#ff914d', color: 'white' }}
-                                >
-                                    View Reports
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                {/* All Users' Cart Items */}
                 <div className="card shadow-sm border-0 mt-4">
                     <div className="card-header bg-white d-flex justify-content-between align-items-center">
                         <h5 className="mb-0" style={{ color: '#2c2c2c' }}>
@@ -282,21 +250,21 @@ export default function AdminDashboard() {
                                         {allCarts.map((cart) => (
                                             <tr key={cart._id}>
                                                 <td>
-                                                    <strong>{cart.user?.name || 'Unknown'}</strong>
+                                                    <strong>{cart.user?.name || 'Unknown User'}</strong>
                                                 </td>
                                                 <td>{cart.user?.email || 'N/A'}</td>
                                                 <td>
-                                                    {cart.items.length === 0 ? (
+                                                    {!cart.items || cart.items.length === 0 ? (
                                                         <span className="text-muted">Empty cart</span>
                                                     ) : (
                                                         <div>
                                                             {cart.items.map((item, idx) => (
                                                                 <div key={idx} className="mb-1">
                                                                     <span className="badge bg-secondary me-1">
-                                                                        {item.name}
+                                                                        {item.name || 'Unknown Item'}
                                                                     </span>
                                                                     <small className="text-muted">
-                                                                        (Qty: {item.quantity}, ${item.price.toFixed(2)})
+                                                                        (Qty: {item.quantity || 0}, ${(item.price || 0).toFixed(2)})
                                                                     </small>
                                                                 </div>
                                                             ))}
@@ -304,16 +272,16 @@ export default function AdminDashboard() {
                                                     )}
                                                 </td>
                                                 <td>
-                                                    <span className="badge bg-info">{cart.itemCount}</span>
+                                                    <span className="badge bg-info">{cart.itemCount || 0}</span>
                                                 </td>
                                                 <td>
                                                     <strong style={{ color: '#ff914d' }}>
-                                                        ${cart.totalValue.toFixed(2)}
+                                                        ${(cart.totalValue || 0).toFixed(2)}
                                                     </strong>
                                                 </td>
                                                 <td>
                                                     <small className="text-muted">
-                                                        {new Date(cart.updatedAt).toLocaleDateString()}
+                                                        {cart.updatedAt ? new Date(cart.updatedAt).toLocaleDateString() : 'N/A'}
                                                     </small>
                                                 </td>
                                             </tr>
@@ -325,7 +293,6 @@ export default function AdminDashboard() {
                     </div>
                 </div>
 
-                {/* Quick Info */}
                 <div className="card shadow-sm border-0 mt-4">
                     <div className="card-header bg-white">
                         <h5 className="mb-0" style={{ color: '#2c2c2c' }}>
@@ -334,18 +301,22 @@ export default function AdminDashboard() {
                         </h5>
                     </div>
                     <div className="card-body">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <p><strong>Logged in as:</strong> {user.name}</p>
-                                <p><strong>Email:</strong> {user.email}</p>
-                                <p><strong>Role:</strong> <span className="badge bg-warning text-dark">Administrator</span></p>
+                        {user ? (
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <p><strong>Logged in as:</strong> {user.name || 'N/A'}</p>
+                                    <p><strong>Email:</strong> {user.email || 'N/A'}</p>
+                                    <p><strong>Role:</strong> <span className="badge bg-warning text-dark">Administrator</span></p>
+                                </div>
+                                <div className="col-md-6">
+                                    <p><strong>User ID:</strong> <code>{user._id || 'N/A'}</code></p>
+                                    <p><strong>Account Type:</strong> Admin Account</p>
+                                    <p><strong>Total Admins:</strong> {loading ? '...' : stats.totalAdmins || 0}</p>
+                                </div>
                             </div>
-                            <div className="col-md-6">
-                                <p><strong>User ID:</strong> <code>{user._id}</code></p>
-                                <p><strong>Account Type:</strong> Admin Account</p>
-                                <p><strong>Total Admins:</strong> {stats.totalAdmins}</p>
-                            </div>
-                        </div>
+                        ) : (
+                            <p className="text-muted">Loading user information...</p>
+                        )}
                     </div>
                 </div>
             </div>

@@ -6,7 +6,6 @@ import blog2 from '../assets/blogPage2.jpg';
 import blog3 from '../assets/blogPage3.jpg';
 import blog4 from '../assets/blogPage4.jpg';
 
-// Mock data for blog posts (using paths from the earlier BlogSection component)
 const blogPosts = [
     { 
         title: "Mastering Obedience: 5 Essential Commands for Every Dog", 
@@ -45,10 +44,8 @@ export default function Blog() {
         <>
             <Navbar />
 
-            {/* Blog Page Content */}
             <div className="container py-5">
                 
-                {/* Header */}
                 <header className="text-center mb-5">
                     <h1 className="fw-bolder" style={{ color: "#2c2c2c", fontSize: "3rem" }}>
                         The Pawstore Blog
@@ -60,10 +57,8 @@ export default function Blog() {
                 
                 <div className="row g-5">
                     
-                    {/* LEFT COLUMN: Blog Post List (8/12 width on large screens) */}
                     <div className="col-lg-8">
                         {blogPosts.map((post, index) => (
-                            // Blog Post Card
                             <div key={index} className="card mb-4 shadow-sm border-0" style={{ borderRadius: "1rem" }}>
                                 <div className="row g-0">
                                     <div className="col-md-4">
@@ -85,43 +80,11 @@ export default function Blog() {
                                             <p className="card-text text-dark">
                                                 {post.excerpt}
                                             </p>
-                                            <a href="#" className="btn btn-sm btn-orange-custom mt-2">
-                                                Read Full Article 
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         ))}
-                    </div>
-
-                    {/* RIGHT COLUMN: Sidebar (4/12 width on large screens) */}
-                    <div className="col-lg-4">
-                        
-                        {/* Categories Card */}
-                        <div className="card bg-light p-4 shadow-sm border-0" style={{ borderRadius: "1rem" }}>
-                            <h5 className="fw-bold mb-3" style={{ color: "#ff914d" }}>Categories</h5>
-                            <ul className="list-unstyled">
-                                {categories.map((cat, index) => (
-                                    <li key={index} className="mb-2">
-                                        <a href="#" className="text-dark d-flex justify-content-between">
-                                            {cat}
-                                            <i className="bi bi-chevron-right small"></i>
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        
-                        {/* Search Placeholder */}
-                        <div className="mt-4">
-                            <input
-                                type="search"
-                                className="form-control form-control-lg rounded-pill border-0 shadow-sm"
-                                placeholder="Search blog posts..."
-                                style={{ backgroundColor: "#ffe8da" }}
-                            />
-                        </div>
                     </div>
                 </div>
             </div>

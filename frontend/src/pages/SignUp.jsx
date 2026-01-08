@@ -41,7 +41,6 @@ export default function SignUp() {
 
     return (
         <div style={{ minHeight: '100vh', display: 'flex', backgroundColor: '#fff5ee' }}>
-            {/* Left Column - Signup Form */}
             <div style={{ 
                 flex: '1', 
                 backgroundColor: 'white', 
@@ -51,7 +50,6 @@ export default function SignUp() {
                 padding: '3rem',
                 maxWidth: '600px'
             }}>
-                {/* Logo */}
                 <div style={{ marginBottom: '3rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
                         <span style={{ fontSize: '2rem' }}>🐾</span>
@@ -64,8 +62,6 @@ export default function SignUp() {
                         Join us today! Please enter your details to get started
                     </p>
                 </div>
-
-                {/* Google Signup Button */}
                 <button
                     type="button"
                     onClick={handleGoogleSignup}
@@ -116,7 +112,6 @@ export default function SignUp() {
                     <div style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }}></div>
                 </div>
 
-                {/* Signup Form */}
                 <form onSubmit={handleSubmit}>
                     <div style={{ marginBottom: '1.25rem' }}>
                         <label htmlFor="name" style={{ 
@@ -208,7 +203,6 @@ export default function SignUp() {
                     />
                 </div>
 
-                    {/* Account Type Toggle */}
                     <div style={{ 
                         marginBottom: '1.25rem',
                         padding: '1rem',
@@ -270,7 +264,6 @@ export default function SignUp() {
                         )}
                     </div>
 
-                    {/* Remember me */}
                     <div style={{ 
                         display: 'flex', 
                         alignItems: 'center',
@@ -294,7 +287,6 @@ export default function SignUp() {
                         </label>
                     </div>
 
-                    {/* Signup Button */}
                     <button
                         type="submit"
                         style={{
@@ -317,7 +309,6 @@ export default function SignUp() {
                 </button>
             </form>
 
-                {/* Login link */}
                 <p style={{ 
                     textAlign: 'center', 
                     color: '#666', 
@@ -339,7 +330,6 @@ export default function SignUp() {
                 </p>
             </div>
 
-            {/* Right Column - Decorative Content */}
             <div style={{ 
                 flex: '1', 
                 backgroundColor: '#ffe8da',
@@ -351,7 +341,6 @@ export default function SignUp() {
                 position: 'relative',
                 overflow: 'hidden'
             }}>
-                {/* Decorative Elements */}
                 <div style={{
                     position: 'absolute',
                     top: '20%',
@@ -373,7 +362,6 @@ export default function SignUp() {
                     opacity: 0.1
                 }}></div>
 
-                {/* Main Illustration Area */}
                 <div style={{
                     textAlign: 'center',
                     zIndex: 1,
@@ -384,7 +372,6 @@ export default function SignUp() {
                         marginBottom: '2rem',
                         filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))'
                     }}>
-                        🐾🐕🐈
                     </div>
                     <h2 style={{
                         fontSize: '2.5rem',
@@ -406,7 +393,6 @@ export default function SignUp() {
                     </p>
                 </div>
 
-                {/* Navigation Dots */}
                 <div style={{
                     position: 'absolute',
                     bottom: '2rem',

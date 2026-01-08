@@ -1,4 +1,3 @@
-// src/pages/Profile.jsx
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -18,7 +17,7 @@ export default function Profile() {
     }, [isLoggedIn, navigate]);
 
     if (!isLoggedIn || !user) {
-        return null; // Will redirect
+        return null; 
     }
 
     const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -54,7 +53,6 @@ export default function Profile() {
                         </div>
                     </div>
 
-                    {/* Cart Summary Card */}
                     <div className="col-lg-6 mb-4">
                         <div className="card shadow-sm">
                             <div className="card-body">
@@ -72,21 +70,10 @@ export default function Profile() {
                                         ${subtotal.toFixed(2)}
                                     </p>
                                 </div>
-                                {cartItems.length > 0 && (
-                                    <button 
-                                        className="btn w-100 mt-3" 
-                                        style={{ backgroundColor: '#ff914d', color: 'white' }}
-                                        onClick={() => navigate('/cart')}
-                                    >
-                                        View Cart
-                                    </button>
-                                )}
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {/* Recent Cart Items */}
                 {cartItems.length > 0 && (
                     <div className="row mt-4">
                         <div className="col-12">

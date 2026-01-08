@@ -1,4 +1,3 @@
-// src/pages/Checkout.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
@@ -58,10 +57,8 @@ export default function Checkout() {
 
             if (response.ok) {
                 if (paymentMethod === 'esewa' && data.esewaData) {
-                    // Submit eSewa payment form
                     submitEsewaForm(data.esewaData);
                 } else {
-                    // COD - redirect to success page
                     navigate(`/payment-success?orderId=${data.order._id}`);
                 }
             } else {
@@ -76,7 +73,6 @@ export default function Checkout() {
     };
 
     const submitEsewaForm = (esewaData) => {
-        // Create and submit eSewa payment form
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = esewaData.url;
@@ -101,19 +97,17 @@ export default function Checkout() {
                 <h2 className="mb-4" style={{ color: '#2c2c2c' }}>Checkout</h2>
                 
                 <div className="row">
-                    {/* Shipping Form */}
                     <div className="col-lg-8">
                         <div className="card shadow-sm mb-4">
                             <div className="card-header bg-white">
                                 <h5 className="mb-0" style={{ color: '#2c2c2c' }}>
-                                    <i className="bi bi-truck me-2" style={{ color: '#ff914d' }}></i>
                                     Shipping Information
                                 </h5>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-3">
-                                        <label className="form-label">Full Name *</label>
+                                        <label className="form-label">Full Name </label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -123,7 +117,7 @@ export default function Checkout() {
                                         />
                                     </div>
                                     <div className="mb-3">
-                                        <label className="form-label">Phone Number *</label>
+                                        <label className="form-label">Phone Number </label>
                                         <input
                                             type="tel"
                                             className="form-control"
@@ -133,7 +127,7 @@ export default function Checkout() {
                                         />
                                     </div>
                                     <div className="mb-3">
-                                        <label className="form-label">Address *</label>
+                                        <label className="form-label">Address </label>
                                         <textarea
                                             className="form-control"
                                             rows="3"
@@ -144,7 +138,7 @@ export default function Checkout() {
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6 mb-3">
-                                            <label className="form-label">City *</label>
+                                            <label className="form-label">City </label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -153,18 +147,7 @@ export default function Checkout() {
                                                 required
                                             />
                                         </div>
-                                        <div className="col-md-6 mb-3">
-                                            <label className="form-label">Postal Code</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                value={shippingAddress.postalCode}
-                                                onChange={(e) => setShippingAddress({ ...shippingAddress, postalCode: e.target.value })}
-                                            />
-                                        </div>
                                     </div>
-
-                                    {/* Payment Method */}
                                     <div className="mb-4">
                                         <label className="form-label fw-bold">Payment Method *</label>
                                         <div className="mt-2">
@@ -187,20 +170,6 @@ export default function Checkout() {
                                                     eSewa (Online Payment)
                                                 </label>
                                             </div>
-                                            <div className="form-check">
-                                                <input
-                                                    className="form-check-input"
-                                                    type="radio"
-                                                    name="paymentMethod"
-                                                    id="cod"
-                                                    value="cod"
-                                                    checked={paymentMethod === 'cod'}
-                                                    onChange={(e) => setPaymentMethod(e.target.value)}
-                                                />
-                                                <label className="form-check-label" htmlFor="cod">
-                                                    Cash on Delivery (COD)
-                                                </label>
-                                            </div>
                                         </div>
                                     </div>
 
@@ -217,7 +186,6 @@ export default function Checkout() {
                         </div>
                     </div>
 
-                    {/* Order Summary */}
                     <div className="col-lg-4">
                         <div className="card shadow-sm sticky-top" style={{ top: '20px' }}>
                             <div className="card-header bg-white">
@@ -232,18 +200,18 @@ export default function Checkout() {
                                                 <br />
                                                 <small className="text-muted">Qty: {item.quantity}</small>
                                             </div>
-                                            <small>${(item.price * item.quantity).toFixed(2)}</small>
+                                            <small>Rs.{(item.price * item.quantity).toFixed(2)}</small>
                                         </div>
                                     ))}
                                 </div>
                                 <hr />
                                 <div className="d-flex justify-content-between mb-2">
                                     <span>Subtotal:</span>
-                                    <span>${subtotal.toFixed(2)}</span>
+                                    <span>Rs.{subtotal.toFixed(2)}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mb-2">
                                     <span>Tax:</span>
-                                    <span>${tax.toFixed(2)}</span>
+                                    <span>Rs.{tax.toFixed(2)}</span>
                                 </div>
                                 <hr />
                                 <div className="d-flex justify-content-between fw-bold">
