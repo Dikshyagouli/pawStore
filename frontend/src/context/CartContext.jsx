@@ -67,7 +67,7 @@ export const CartProvider = ({ children }) => {
         const item = cartItems.find(i => i._id === itemId);
         if (!item) return;
         
-        const newQuantity = item.quantity + 1; // Calculate locally first
+        const newQuantity = item.quantity + 1;
         updateBackendQuantity(itemId, newQuantity);
     };
 
