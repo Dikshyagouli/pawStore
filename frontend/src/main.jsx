@@ -10,7 +10,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 // Global CSS
-import "./App.css";
+import "./../src/app.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
