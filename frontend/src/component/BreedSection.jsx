@@ -11,13 +11,13 @@ import japaneseSpitzImg from "../assets/spitz..jpeg";
 import labradorImg from "../assets/labrador.jpg";
 
 const breeds = [
-  { id: 1, name: "Golden Retriever", img: goldenRetrieverImg, price: 1200.00, slug: "golden-retriever" },
-  { id: 2, name: "Siberian Husky", img: siberianHuskyImg, price: 1500.00, slug: "siberian-husky" },
-  { id: 3, name: "Pitbull", img: pitbullImg, price: 1300.00, slug: "pitbull" },
-  { id: 4, name: "German Shepherd", img: germanShepherdImg, price: 1800.00, slug: "german-shepherd" },
-  { id: 5, name: "Pug", img: pugImg, price: 800.00, slug: "pug" },
-  { id: 6, name: "Japanese Spitz", img: japaneseSpitzImg, price: 1000.00, slug: "japanese-spitz" },
-  { id: 7, name: "Labrador", img: labradorImg, price: 1100.00, slug: "labrador" },
+  { id: 1, name: "Golden Retriever", img: goldenRetrieverImg, price: 1200.0, slug: "golden-retriever" },
+  { id: 2, name: "Siberian Husky", img: siberianHuskyImg, price: 1500.0, slug: "siberian-husky" },
+  { id: 3, name: "Pitbull", img: pitbullImg, price: 1300.0, slug: "pitbull" },
+  { id: 4, name: "German Shepherd", img: germanShepherdImg, price: 1800.0, slug: "german-shepherd" },
+  { id: 5, name: "Pug", img: pugImg, price: 800.0, slug: "pug" },
+  { id: 6, name: "Japanese Spitz", img: japaneseSpitzImg, price: 1000.0, slug: "japanese-spitz" },
+  { id: 7, name: "Labrador", img: labradorImg, price: 1100.0, slug: "labrador" },
 ];
 
 export default function BreedSection() {
@@ -26,80 +26,108 @@ export default function BreedSection() {
 
   const handleBuyMe = async (breed) => {
     if (!isLoggedIn) {
-      alert('Please login to add items to cart');
+      alert("Please login to add items to cart");
       return;
     }
 
-    const itemToAdd = {
+    const result = await addItem({
       id: breed.id,
       name: breed.name,
       price: breed.price,
       quantity: 1,
-    };
+    });
 
-    const result = await addItem(itemToAdd);
-    if (result.success) {
-      alert(`${breed.name} added to cart!`);
-    } else {
-      alert(result.message || 'Failed to add to cart');
-    }
+    alert(
+      result.success
+        ? `${breed.name} added to cart!`
+        : result.message || "Failed to add to cart"
+    );
   };
 
   return (
-    <section className="container py-4 text-center">
-      <h2 className="fw-bolder" style={{ color: "#2c2c2c", fontSize: "2.5rem" }}>
-        Dog Breed
-      </h2>
-      <p className="text-dark fs-5 mt-2">
-        Find yourself a perfect friend from a wide variety of choices.
-      </p>
+    <>
+      <style>{`
+        .breed-img-circle {
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s;
+        }
+        .breed-img-circle:hover {
+          transform: translateY(-5px);
+        }
+        .btn-orange-custom {
+          background-color: #ff914d;
+          border-color: #ff914d;
+          color: white;
+          border-radius: 25px;
+          transition: background-color 0.3s, border-color 0.3s;
+        }
+        .btn-orange-custom:hover {
+          background-color: #e68345;
+          border-color: #e68345;
+        }
+      `}</style>
 
-      <div className="row justify-content-center mt-5">
-        {breeds.map((b, i) => (
-          <div key={i} className="col-3 col-sm-3 col-md-2 text-center mb-4">
-            <Link to={`/breeds/${b.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img
-                src={b.img}
-                className="rounded-circle img-fluid breed-img-circle"
-                alt={b.name}
-                style={{ 
-                  height: "140px", 
-                  width: "140px", 
-                  objectFit: "cover",
-                  marginBottom: "0.5rem",
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s'
-                }}
-                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-              />
-            </Link>
-            <p className="mt-2 text-dark fw-bold">{b.name}</p>
-            <p className="mb-2" style={{ color: "#ff914d", fontWeight: 'bold' }}>
-              Rs.{b.price.toFixed(2)}
-            </p>
-            <div className="d-flex gap-1 justify-content-center">
-              <Link 
-                to={`/breeds/${b.slug}`}
-                className="btn btn-sm"
-                style={{ backgroundColor: '#2c2c2c', color: 'white', fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}
-              >
-                Details
+      <section className="container py-4 text-center">
+        <h2 className="fw-bolder" style={{ color: "#2c2c2c", fontSize: "2.5rem" }}>
+          Dog Breed
+        </h2>
+        <p className="text-dark fs-5 mt-2">
+          Find yourself a perfect friend from a wide variety of choices.
+        </p>
+
+        <div className="row justify-content-center mt-5">
+          {breeds.map((b) => (
+            <div key={b.id} className="col-3 col-sm-3 col-md-2 text-center mb-4">
+              <Link to={`/breeds/${b.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
+                <img
+                  src={b.img}
+                  alt={b.name}
+                  className="rounded-circle img-fluid breed-img-circle"
+                  style={{
+                    height: "140px",
+                    width: "140px",
+                    objectFit: "cover",
+                    marginBottom: "0.5rem",
+                    cursor: "pointer",
+                  }}
+                  onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
+                  onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
+                />
               </Link>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleBuyMe(b);
-                }}
-                className="btn btn-sm"
-                style={{ backgroundColor: '#ff914d', color: 'white', fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}
-              >
-                Buy
-              </button>
+
+              <p className="mt-2 text-dark fw-bold">{b.name}</p>
+              <p className="mb-2" style={{ color: "#ff914d", fontWeight: "bold" }}>
+                Rs.{b.price.toFixed(2)}
+              </p>
+
+              <div className="d-flex gap-1 justify-content-center">
+                <Link
+                  to={`/breeds/${b.slug}`}
+                  className="btn btn-sm"
+                  style={{
+                    backgroundColor: "#2c2c2c",
+                    color: "white",
+                    fontSize: "0.75rem",
+                    padding: "0.25rem 0.5rem",
+                  }}
+                >
+                  Details
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleBuyMe(b);
+                  }}
+                  className="btn btn-sm btn-orange-custom"
+                  style={{ fontSize: "0.75rem", padding: "0.25rem 0.5rem" }}
+                >
+                  Buy
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
