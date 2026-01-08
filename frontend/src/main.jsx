@@ -9,8 +9,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // Bootstrap Icons (optional but useful)
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-// // Global CSS
-// import "./../src/app.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
