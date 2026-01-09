@@ -6,7 +6,6 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api/cart`;
-
 export const CartProvider = ({ children }) => {
     const { user, isLoggedIn } = useAuth();
     const [cartItems, setCartItems] = useState([]);

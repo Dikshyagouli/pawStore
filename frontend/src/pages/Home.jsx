@@ -1,10 +1,10 @@
-import Navbar from "../component/Navbar";
-import HeroSection from "../component/HeroSection";
-import BreedSection from "../component/BreedSection";
-import PetProducts from "../component/PetProducts";
-import BlogSection from "../component/BlogSection";
-import Footer from "../component/Footer";
-import NewsletterSection from "../component/NewsletterSection";
+import Navbar from "../components/Navbar";
+import HeroSection from "../components/HeroSection";
+import BreedSection from "../components/BreedSection";
+import PetProducts from "../components/PetProducts";
+import BlogSection from "../components/BlogSection";
+import Footer from "../components/Footer";
+import NewsletterSection from "../components/NewsletterSection";
 
 export default function Home() {
   return (

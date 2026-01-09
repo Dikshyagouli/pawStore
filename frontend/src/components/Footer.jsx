@@ -69,13 +69,13 @@ export default function Footer() {
         </div>
       </div>
 
-      <style px-scope>{`
-        .hover-orange:hover {
-          color: #ff914d !important;
-          padding-left: 5px;
-          transition: 0.3s;
-        }
-      `}</style>
+      <style>{`
+  .hover-orange:hover {
+    color: #ff914d !important;
+    padding-left: 5px;
+    transition: 0.3s;
+  }
+`}</style>
     </footer>
   );
 }

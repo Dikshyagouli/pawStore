@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
-import Navbar from '../../component/Navbar.jsx';
-import Footer from '../../component/Footer.jsx';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
 
 const API_URL = 'http://localhost:5000/api/user';
 

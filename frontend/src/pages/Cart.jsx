@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx'; 
 import { useAuth } from '../context/AuthContext.jsx';
-import Navbar from '../component/Navbar.jsx';
+import Navbar from '../components/Navbar.jsx';
 
 export default function Cart() {
     const { 
