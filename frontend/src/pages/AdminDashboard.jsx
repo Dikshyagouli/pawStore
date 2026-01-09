@@ -83,7 +83,6 @@ export default function AdminDashboard() {
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h2 className="mb-0" style={{ color: '#2c2c2c' }}>
-                        <i className="bi bi-speedometer2 me-2" style={{ color: '#ff914d' }}></i>
                         Admin Dashboard
                     </h2>
                     <span className="badge bg-warning text-dark">Admin Only</span>
