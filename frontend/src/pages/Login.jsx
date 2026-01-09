@@ -283,7 +283,7 @@ export default function Login() {
                         marginBottom: '2rem',
                         filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))'
                     }}>
-                        🐾🐕🐈
+        
                     </div>
                     <h2 style={{
                         fontSize: '2.5rem',
