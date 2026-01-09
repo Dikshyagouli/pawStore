@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../component/Navbar'; 
-import Footer from '../component/footer';
+import Footer from '../component/Footer.jsx';
 import { useCart } from '../context/CartContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import goldend from '../assets/golden.jpg';

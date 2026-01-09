@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../component/Navbar'; 
-import Footer from '../component/footer'; 
+import Footer from '../component/Footer.jsx'; 
 import { useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';

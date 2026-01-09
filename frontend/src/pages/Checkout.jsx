@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import Navbar from '../component/Navbar.jsx';
-import Footer from '../component/footer.jsx';
+import Footer from '../component/Footer.jsx';
 
 const API_URL = 'http://localhost:5000/api/orders';
 

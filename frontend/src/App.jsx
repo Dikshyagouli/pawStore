@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Breeds from "./pages/Breeds";
-import Accessories from "./pages/Accessories "; 
+import Accessories from "./pages/Accessories"; 
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import BreedDetail from "./pages/BreedDetail";

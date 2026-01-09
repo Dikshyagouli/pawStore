@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../component/Navbar.jsx';
-import Footer from '../component/footer.jsx';
+import Footer from '../component/Footer.jsx';
 
 export default function PaymentFailure() {
     const navigate = useNavigate();

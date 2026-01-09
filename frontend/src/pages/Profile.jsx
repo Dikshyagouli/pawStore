@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useCart } from '../context/CartContext.jsx';
 import Navbar from '../component/Navbar.jsx';
-import Footer from '../component/footer.jsx';
+import Footer from '../component/Footer.jsx';
 
 export default function Profile() {
     const { user, isLoggedIn } = useAuth();
